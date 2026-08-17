@@ -1,0 +1,14 @@
+.historial-container { padding: 20px; max-width: 800px; margin: 0 auto; }
+.historial-title { margin-bottom: 20px; font-size: 24px; color: var(--primary-color); }
+.center-content { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; }
+.empty-state { text-align: center; color: var(--text-secondary); }
+.reports-list { display: flex; flex-direction: column; gap: 12px; }
+.report-card { background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; cursor: pointer; transition: all 0.2s; }
+.report-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: var(--primary-color); }
+.report-card-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
+.report-date, .report-contract, .report-supervisor { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 14px; }
+.report-supervisor { color: var(--primary-color); }
+.pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color); }
+.btn-page { padding: 8px 16px; border-radius: 6px; background: white; border: 1px solid var(--border-color); cursor: pointer; }
+.btn-page:disabled { opacity: 0.5; cursor: not-allowed; }
+.page-info { font-weight: 500; font-size: 14px; color: var(--text-secondary); }

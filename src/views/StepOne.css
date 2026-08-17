@@ -1,0 +1,42 @@
+.step-one-container {
+  padding: 1rem;
+}
+
+.step-card {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  margin-top: 1rem;
+}
+
+.step-badge {
+  display: inline-block;
+  background-color: #FCE8EC;
+  color: var(--brand-red);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 1rem;
+}
+
+.step-title {
+  color: var(--brand-blue);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.step-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.step-form {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,27 @@
+.main-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-card);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+}
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  margin-left: -0.25rem;
+  z-index: 20;
+}
+
+.logo-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
