@@ -6,9 +6,8 @@ export const generatePdf = async (formData, photos) => {
   container.style.position = 'absolute';
   container.style.left = '-9999px';
   container.style.top = '0';
-  // Increase width/height for better resolution but keep A4 proportion
+  // Use a fixed width, let height be auto so it captures everything
   container.style.width = '800px'; 
-  container.style.height = '1131px'; 
   container.style.backgroundColor = 'white';
   document.body.appendChild(container);
 
@@ -94,7 +93,7 @@ export const generatePdf = async (formData, photos) => {
       ` : '';
 
       container.innerHTML = `
-        <div style="padding: 10px; box-sizing: border-box; width: 100%; height: 100%; font-family: Arial, sans-serif; color: black; display: flex; flex-direction: column;">
+        <div style="padding: 10px; box-sizing: border-box; width: 100%; font-family: Arial, sans-serif; color: black; display: flex; flex-direction: column;">
           <table style="width: 100%; border-collapse: collapse; border: 2px solid black; font-size: 10px;">
             <tr>
               <td style="width: 15%; border: 2px solid black; text-align: center; padding: 5px;">
@@ -131,7 +130,7 @@ export const generatePdf = async (formData, photos) => {
                     return `
                     <td style="border: 2px solid black; text-align: center; vertical-align: middle; padding: 5px; overflow: hidden;">
                       ${photo.url 
-                        ? `<img src="${photo.url}" crossOrigin="anonymous" style="width: 98%; height: 320px; object-fit: fill; margin: 0 auto; display: block;" />`
+                        ? `<img src="${photo.url}" crossOrigin="anonymous" style="width: 98%; height: 300px; object-fit: fill; margin: 0 auto; display: block;" />`
                         : `<div style="font-weight: bold; font-size: 11px;">${photo.label}</div>`
                       }
                     </td>
@@ -155,15 +154,21 @@ export const generatePdf = async (formData, photos) => {
       const pdfPageWidth = doc.internal.pageSize.getWidth();
       const pdfPageHeight = doc.internal.pageSize.getHeight();
       
-      const pdfWidth = pdfPageWidth - (margin * 2);
-      let pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      
+      const maxPdfWidth = pdfPageWidth - (margin * 2);
       const maxPdfHeight = pdfPageHeight - (margin * 2);
-      if (pdfHeight > maxPdfHeight) {
-        pdfHeight = maxPdfHeight;
+
+      let finalPdfWidth = maxPdfWidth;
+      let finalPdfHeight = (canvas.height * finalPdfWidth) / canvas.width;
+      
+      if (finalPdfHeight > maxPdfHeight) {
+        const ratio = maxPdfHeight / finalPdfHeight;
+        finalPdfHeight = maxPdfHeight;
+        finalPdfWidth = finalPdfWidth * ratio;
       }
       
-      doc.addImage(imgData, 'JPEG', margin, margin, pdfWidth, pdfHeight);
+      const xOffset = margin + (maxPdfWidth - finalPdfWidth) / 2;
+      
+      doc.addImage(imgData, 'JPEG', xOffset, margin, finalPdfWidth, finalPdfHeight);
       isFirstPage = false;
     }
 
