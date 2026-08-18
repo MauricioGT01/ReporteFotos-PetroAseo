@@ -35,14 +35,9 @@ export const generatePdf = async (formData, photos) => {
 
     const otrasActividades = 'OTRAS ACTIVIDADES LAVADO, RECOLECCION DE RESIDUOS Y SEGREGACION DE RESIDUOS SOLIDOS';
 
-    // Determinar textos del encabezado según el contrato
+    // Determinar textos del encabezado según el contrato (Logo y Nombre de Consorcio siempre es Petrolimpio)
     let headerElaboradoPor = 'CONSORCIO PETRO LIMPIO';
     let headerLogo = '/logo-petrolimpio.png';
-
-    if (formData.contract === 'Contrato B2') {
-      headerElaboradoPor = 'CONSORCIO PETRO ASEO'; // Modificar si el cliente da otro nombre
-      headerLogo = '/logo-petroaseo.png';
-    }
 
     const pagesConfig = [
       {
@@ -93,49 +88,48 @@ export const generatePdf = async (formData, photos) => {
       
       const headerRowTurno = page.header.name ? `
         <tr>
-          <td style="border: 1px solid black; padding: 5px; font-weight: bold;">${page.header.name} :</td>
-          <td colspan="3" style="border: 1px solid black; padding: 5px;">${page.header.hours}</td>
+          <td style="border: 2px solid black; padding: 5px; font-weight: bold;">${page.header.name} :</td>
+          <td colspan="3" style="border: 2px solid black; padding: 5px;">${page.header.hours}</td>
         </tr>
       ` : '';
 
       container.innerHTML = `
         <div style="padding: 10px; box-sizing: border-box; width: 100%; height: 100%; font-family: Arial, sans-serif; color: black; display: flex; flex-direction: column;">
-          <div style="border: 2px solid black; padding: 5px; width: 100%; height: 100%; display: flex; flex-direction: column; box-sizing: border-box;">
-            <table style="width: 100%; border-collapse: collapse; border: 1px solid black; font-size: 10px;">
-              <tr>
-                <td style="width: 15%; border: 1px solid black; text-align: center; padding: 5px;">
-                  <img src="${headerLogo}" style="max-width: 100%; max-height: 40px; object-fit: contain;" alt="Logo" />
-                </td>
-                <td colspan="3" style="width: 85%; border: 1px solid black; text-align: center; font-weight: bold; padding: 5px; font-size: 14px;">
-                  INFORME FOTOGRÁFICO<br/>Elaborado por: ${headerElaboradoPor}
-                </td>
-              </tr>
-              <tr>
-                <td style="border: 1px solid black; padding: 5px; font-weight: bold;">ACTIVIDAD:</td>
-                <td colspan="3" style="border: 1px solid black; padding: 5px; text-transform: uppercase;">
-                  ${page.header.actividad}
-                </td>
-              </tr>
-              <tr>
-                <td style="border: 1px solid black; padding: 5px; font-weight: bold;">CLIENTE:</td>
-                <td colspan="3" style="border: 1px solid black; padding: 5px;">EMPRESA MUNICIPAL DE MERCADOS S.A</td>
-              </tr>
-              <tr>
-                <td style="border: 1px solid black; padding: 5px; font-weight: bold;">UBICACIÓN:</td>
-                <td style="border: 1px solid black; padding: 5px;">GRAN MERCADO MAYORISTA DE LIMA</td>
-                <td style="border: 1px solid black; padding: 5px; font-weight: bold; width: 10%;">FECHA:</td>
-                <td style="border: 1px solid black; padding: 5px; width: 15%; text-align: center; font-size: 12px; font-weight: bold;">${formattedDate}</td>
-              </tr>
-              ${headerRowTurno}
-            </table>
+          <table style="width: 100%; border-collapse: collapse; border: 2px solid black; font-size: 10px;">
+            <tr>
+              <td style="width: 15%; border: 2px solid black; text-align: center; padding: 5px;">
+                <img src="${headerLogo}" style="max-width: 100%; max-height: 40px; object-fit: contain;" alt="Logo" />
+              </td>
+              <td colspan="3" style="width: 85%; border: 2px solid black; text-align: center; font-weight: bold; padding: 5px; font-size: 14px;">
+                INFORME FOTOGRÁFICO<br/>Elaborado por: ${headerElaboradoPor}
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 2px solid black; padding: 5px; font-weight: bold;">ACTIVIDAD:</td>
+              <td colspan="3" style="border: 2px solid black; padding: 5px; text-transform: uppercase;">
+                ${page.header.actividad}
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 2px solid black; padding: 5px; font-weight: bold;">CLIENTE:</td>
+              <td colspan="3" style="border: 2px solid black; padding: 5px;">EMPRESA MUNICIPAL DE MERCADOS S.A</td>
+            </tr>
+            <tr>
+              <td style="border: 2px solid black; padding: 5px; font-weight: bold;">UBICACIÓN:</td>
+              <td style="border: 2px solid black; padding: 5px;">GRAN MERCADO MAYORISTA DE LIMA</td>
+              <td style="border: 2px solid black; padding: 5px; font-weight: bold; width: 10%;">FECHA:</td>
+              <td style="border: 2px solid black; padding: 5px; width: 15%; text-align: center; font-size: 12px; font-weight: bold;">${formattedDate}</td>
+            </tr>
+            ${headerRowTurno}
+          </table>
 
-            <table style="width: 100%; flex: 1; border-collapse: collapse; border: 1px solid black; margin-top: -1px; table-layout: fixed;">
+          <table style="width: 100%; flex: 1; border-collapse: collapse; border: 2px solid black; border-top: none; table-layout: fixed;">
               ${page.rows.map(row => `
                 <tr style="height: 33.33%;">
                   ${row.map(photo => {
-                    if (!photo) return `<td style="border: 1px solid black;"></td>`;
+                    if (!photo) return `<td style="border: 2px solid black;"></td>`;
                     return `
-                    <td style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 5px; overflow: hidden;">
+                    <td style="border: 2px solid black; text-align: center; vertical-align: middle; padding: 5px; overflow: hidden;">
                       ${photo.url 
                         ? `<img src="${photo.url}" crossOrigin="anonymous" style="width: 98%; height: 320px; object-fit: fill; margin: 0 auto; display: block;" />`
                         : `<div style="font-weight: bold; font-size: 11px;">${photo.label}</div>`
@@ -145,7 +139,6 @@ export const generatePdf = async (formData, photos) => {
                 </tr>
               `).join('')}
             </table>
-          </div>
         </div>
       `;
 
