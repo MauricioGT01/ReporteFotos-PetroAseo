@@ -126,12 +126,12 @@ export const generatePdf = async (formData, photos) => {
               ${page.rows.map(row => `
                 <tr style="height: 33.33%;">
                   ${row.map(photo => {
-                    if (!photo) return `<td style="border: 2px solid black;"></td>`;
+                    if (!photo) return `<td style="border: 2px solid black; height: 300px;"></td>`;
                     return `
-                    <td style="border: 2px solid black; text-align: center; vertical-align: middle; padding: 5px; overflow: hidden;">
+                    <td style="border: 2px solid black; text-align: center; vertical-align: middle; padding: 5px; overflow: hidden; height: 300px;">
                       ${photo.url 
                         ? `<img src="${photo.url}" crossOrigin="anonymous" style="width: 98%; height: 300px; object-fit: fill; margin: 0 auto; display: block;" />`
-                        : `<div style="font-weight: bold; font-size: 11px;">${photo.label}</div>`
+                        : `<div style="font-weight: bold; font-size: 11px; height: 300px; display: flex; align-items: center; justify-content: center;">${photo.label}</div>`
                       }
                     </td>
                   `}).join('')}
