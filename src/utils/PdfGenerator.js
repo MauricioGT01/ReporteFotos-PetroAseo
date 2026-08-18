@@ -75,8 +75,7 @@ export const generatePdf = async (formData, photos) => {
         header: { name: null, hours: null, actividad: otrasActividades },
         rows: [
           [getPhoto('Foto de lavamanos 1er turno'), getPhoto('Foto de lavamanos 2do turno'), getPhoto('Foto de lavamanos 3er turno')],
-          [getPhoto('foto de segregacion 1er turno'), getPhoto('foto de segregacion 2do turno'), getPhoto('foto de segregacion 3er turno')],
-          [null, null, null]
+          [getPhoto('foto de segregacion 1er turno'), getPhoto('foto de segregacion 2do turno'), getPhoto('foto de segregacion 3er turno')]
         ]
       }
     ];
