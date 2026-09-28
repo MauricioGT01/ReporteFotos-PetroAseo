@@ -41,8 +41,7 @@ export const StepOne = ({ formData, setFormData, onContinue }) => {
   };
 
   const contractOptions = [
-    { value: 'Contrato Principal', label: 'Contrato Principal' },
-    { value: 'Contrato B2', label: 'Contrato B2' }
+    { value: 'Contrato Principal', label: 'Contrato Principal' }
   ];
 
   return (
