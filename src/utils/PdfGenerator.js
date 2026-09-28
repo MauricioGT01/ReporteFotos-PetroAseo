@@ -1,7 +1,7 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-export const generatePdf = async (formData, photos) => {
+export const generatePdf = async (formData, photos, targetShift = null) => {
   const container = document.createElement('div');
   container.style.position = 'absolute';
   container.style.left = '-9999px';
@@ -78,9 +78,14 @@ export const generatePdf = async (formData, photos) => {
       }
     ];
 
+    let filteredPagesConfig = pagesConfig;
+    if (targetShift) {
+      filteredPagesConfig = [pagesConfig[targetShift - 1]];
+    }
+
     let isFirstPage = true;
 
-    for (const page of pagesConfig) {
+    for (const page of filteredPagesConfig) {
       
       const headerRowTurno = page.header.name ? `
         <tr>
@@ -169,7 +174,7 @@ export const generatePdf = async (formData, photos) => {
       isFirstPage = false;
     }
 
-    const fileName = `${formData.supervisor || 'Supervisor'} - ${formData.contract || 'Contrato'} - ${formattedDate || 'Fecha'}.pdf`;
+    const fileName = `${formData.supervisor || 'Supervisor'} - ${formData.contract || 'Contrato'} - ${formattedDate || 'Fecha'}${targetShift ? ` - Turno ${targetShift}` : ''}.pdf`;
     doc.save(fileName);
 
   } catch (error) {

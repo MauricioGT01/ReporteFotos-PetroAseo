@@ -130,9 +130,9 @@ export const StepTwo = ({ formData, reportId, onBack }) => {
     return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
   };
 
-  const handleDownloadPdf = async () => {
+  const handleDownloadPdf = async (shift = null) => {
     setIsGeneratingPdf(true);
-    await generatePdf(formData, photos);
+    await generatePdf(formData, photos, shift);
     setIsGeneratingPdf(false);
   };
 
@@ -155,10 +155,17 @@ export const StepTwo = ({ formData, reportId, onBack }) => {
           <h2 className="header-contract">{formData.contract || 'Contrato'}</h2>
           <span className="header-date">{formatDisplayDate(formData.date)}</span>
         </div>
-        <button className="download-btn" onClick={handleDownloadPdf} disabled={isGeneratingPdf || isLoadingPhotos}>
-          {isGeneratingPdf ? <Loader2 size={16} className="spinner" /> : <Download size={16} />} 
-          {isGeneratingPdf ? 'Generando...' : 'Descargar PDF'}
-        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <button className="download-btn" onClick={() => handleDownloadPdf()} disabled={isGeneratingPdf || isLoadingPhotos} style={{ width: '100%', justifyContent: 'center' }}>
+            {isGeneratingPdf ? <Loader2 size={16} className="spinner" /> : <Download size={16} />} 
+            Completo
+          </button>
+          <div style={{ display: 'flex', gap: '4px' }}>
+            <button className="download-btn" onClick={() => handleDownloadPdf(1)} disabled={isGeneratingPdf || isLoadingPhotos} title="Descargar Turno 1" style={{ flex: 1, padding: '4px', fontSize: '11px', justifyContent: 'center' }}>T1</button>
+            <button className="download-btn" onClick={() => handleDownloadPdf(2)} disabled={isGeneratingPdf || isLoadingPhotos} title="Descargar Turno 2" style={{ flex: 1, padding: '4px', fontSize: '11px', justifyContent: 'center' }}>T2</button>
+            <button className="download-btn" onClick={() => handleDownloadPdf(3)} disabled={isGeneratingPdf || isLoadingPhotos} title="Descargar Turno 3" style={{ flex: 1, padding: '4px', fontSize: '11px', justifyContent: 'center' }}>T3</button>
+          </div>
+        </div>
       </div>
 
       <div className="tabs-container">
