@@ -32,8 +32,8 @@ export const generatePdf = async (formData, photos, targetShift = null) => {
 
     const otrasActividades = 'OTRAS ACTIVIDADES LAVADO, RECOLECCION DE RESIDUOS Y SEGREGACION DE RESIDUOS SOLIDOS';
 
-    // Determinar textos del encabezado según el contrato (Logo es Petrolimpio, pero nombre es Petro Aseo)
-    let headerElaboradoPor = 'CONSORCIO PETRO ASEO';
+    // Determinar textos del encabezado según el contrato
+    let headerElaboradoPor = 'PetroAseo';
     let headerLogo = '/logo-petrolimpio.png';
 
     const pagesConfig = [
